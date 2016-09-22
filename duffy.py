@@ -17,7 +17,7 @@ def get_nodes(count,ver="7",arch="x86_64"):
 
   ssid = res['ssid']
   nodes = res['hosts']
-  print "duffy /Nodes/get result ssid =" + ssid
+  print "duffy /Nodes/get result ssid = " + ssid
   return nodes,ssid
 
 # release nodes for the current ssid
@@ -27,7 +27,7 @@ def release_nodes(ssid):
   res = urllib.urlopen(done_nodes_url).read()
 
 # execute cmd on host through ssh, synchronious 
-def ssh_execute(cmd,host):
+def ssh_execute(host,cmd):
   ssh_prefix = "ssh -t -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
   cmd_template = "{} root@{} '{}'"
   
@@ -36,7 +36,7 @@ def ssh_execute(cmd,host):
   return cmd
 
 # execute cmd on host, asynchronously
-def ssh_execute_async(cmd,host):
+def ssh_execute_async(host,cmd):
   ssh_prefix = "ssh -t -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
   cmd_template = "{} root@{} '{}'"
   
