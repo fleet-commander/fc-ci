@@ -17,7 +17,9 @@ username = "fcuser"
 options = string.digits + string.letters + string.punctuation
 pwd = ''.join(random.SystemRandom().choice(options) for _ in range(25))
 
-prepare_user_cmd = "useradd -m {}; chpasswd <<< \"{}:{}\"".format(username,username,pwd)
+prepare_user_cmd = """
+useradd -m {}; chpasswd <<< \"{}:{}\"
+""".format(username,username,pwd)
 
 prepare_git_cmd = """
 sudo yum -q -y install git;
@@ -25,13 +27,20 @@ cd ~
 git clone https://github.com/sk3r/fc-ci.git;
 """
 
+prepare_shared_files = """
+mkdir /root/shared;
+cd /root/shared
+echo {} > ./libvirt_node_ip
+echo {} > ./fcuser_pwd
+""".format(nodes[0],pwd)
+
 try:
   # install git and prepare fc user on all nodes
   #FIXME do this async ...
   for n in nodes:
     duffy.ssh_execute(n,prepare_git_cmd)
     duffy.ssh_execute(n,prepare_user_cmd)
-    duffy.ssh_execute(n,"echo {} > /root/libvirt_node_ip".format(nodes[0]))
+    duffy.ssh_execute(n,prepare_shared_files)
 
   libvirt_node = duffy.ssh_execute_async(nodes[0],"cd ~/fc-ci; ./prepare_libvirt_node.sh")
   docker_node = duffy.ssh_execute_async(nodes[1],"cd ~/fc-ci; ./prepare_docker_node.sh") 

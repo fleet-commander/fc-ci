@@ -1,0 +1,12 @@
+version: '2'
+services:
+  rawhide:
+    image: "fedora:rawhide"
+    command: /root/shared/rawhide.sh 
+    volumes:
+      - ./distro_tests/:/root/shared/
+  latest:
+    image: "fedora:latest"
+    command: /root/shared/latest.sh 
+    volumes_from:
+      - rawhide
