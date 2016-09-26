@@ -3,11 +3,12 @@
 # this file is based on 
 # https://github.com/kbsingh/centos-ci-scripts/blob/master/build_python_script.py
 
+import os
 import json, urllib, subprocess 
 
 url_base="http://admin.ci.centos.org:8080/Node/"
 
-api_key=open('duffy.key').read().strip()
+api_key=open(os.path.expanduser('~/duffy.key')).read().strip()
 
 # get count of nodes from duffy
 def get_nodes(count,ver="7",arch="x86_64"):
