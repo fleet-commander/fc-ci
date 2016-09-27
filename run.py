@@ -24,7 +24,7 @@ useradd -m {}; chpasswd <<< \"{}:{}\"
 prepare_git_cmd = """
 sudo yum -q -y install git;
 cd ~
-git clone https://github.com/sk3r/fc-ci.git;
+git clone https://github.com/fleet-commander/fc-ci.git; 
 """
 
 prepare_shared_files = """
