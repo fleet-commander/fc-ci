@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-sudo tee /etc/yum.repos.d/docker.repo <<-'EOF'
+tee /etc/yum.repos.d/docker.repo <<-'EOF'
 [dockerrepo]
 name=Docker Repository
 baseurl=https://yum.dockerproject.org/repo/main/centos/7/
@@ -10,8 +10,8 @@ gpgkey=https://yum.dockerproject.org/gpg
 EOF
 
 # install docker
-sudo yum -y install docker-engine
-sudo systemctl start docker 
+yum -y install docker-engine
+systemctl start docker 
 
 # install docker-compose
 # FIXME might want to install it with pip later
@@ -23,5 +23,5 @@ chmod +x /usr/local/bin/docker-compose
 cp -r ~/fc-ci/distro_tests/* /root/shared/
 
 cd ~/fc-ci
-sudo /usr/local/bin/docker-compose up
+/usr/local/bin/docker-compose up
 

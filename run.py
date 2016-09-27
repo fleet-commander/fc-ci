@@ -22,7 +22,7 @@ useradd -m {}; chpasswd <<< \"{}:{}\"
 """.format(username,username,pwd)
 
 prepare_git_cmd = """
-sudo yum -q -y install git;
+yum -q -y install git;
 cd ~
 git clone https://github.com/fleet-commander/fc-ci.git; 
 """
