@@ -33,8 +33,7 @@ def ssh_execute(host,cmd):
   cmd_template = "{} root@{} '{}'"
   
   cmd = cmd_template.format(ssh_prefix,host,cmd)
-  subprocess.call(cmd,shell=True)
-  return cmd
+  return subprocess.call(cmd,shell=True)
 
 # execute cmd on host, asynchronously
 def ssh_execute_async(host,cmd):
