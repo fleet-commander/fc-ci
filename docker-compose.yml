@@ -4,7 +4,7 @@ services:
     image: "fedora:rawhide"
     command: /root/shared/rawhide.sh 
     volumes:
-      - ./distro_tests/:/root/shared/
+      - /root/shared/:/root/shared/
   latest:
     image: "fedora:latest"
     command: /root/shared/latest.sh 

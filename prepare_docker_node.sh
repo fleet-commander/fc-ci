@@ -18,11 +18,9 @@ sudo systemctl start docker
 curl -L https://github.com/docker/compose/releases/download/1.8.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
-# this machine (docker node) will have some shared files in /root/shared
-# we want these to be available to every docker container
-# the folder ./fc-ci/distro_tests will be mounted inside the contaienrs, so we
-# copy the shared files there
-cp -r /root/shared/* ~/fc-ci/distro_tests
+# contents of /root/shared will be shared with every docker container
+# we want to share distro_tests, so copy its contents there
+cp -r ~/fc-ci/distro_tests/* /root/shared/
 
 cd ~/fc-ci
 sudo /usr/local/bin/docker-compose up
